@@ -1,0 +1,31 @@
+# Database settings
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/world?serverTimezone=Europe/Moscow
+    username: root
+    password: root
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: false
+    database: default
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+  mandatory-file-encoding: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+    multipart:
+      max-file-size: 5MB
+#Logging
+#logging:
+#  config: classpath:logback.xml
+
+server:
+    port: 3000
+
