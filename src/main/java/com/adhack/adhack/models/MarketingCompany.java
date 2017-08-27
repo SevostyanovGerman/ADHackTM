@@ -1,5 +1,7 @@
 package com.adhack.adhack.models;
 
+import java.util.List;
+
 public class MarketingCompany {
 	private String companyName;
 	private String domain;
@@ -11,7 +13,22 @@ public class MarketingCompany {
 	private int sex;
 	private String targetLink;
 	private int limit;
+	private List<String> markets;
+	private String longDescription;
 //	private Date endTime;
+
+
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
+	}
+
+	public List<String> getMarkets() {
+		return markets;
+	}
+
+	public void setMarkets(List<String> markets) {
+		this.markets = markets;
+	}
 
 	public String getCompanyName() {
 		return companyName;
@@ -117,4 +134,9 @@ public class MarketingCompany {
 				", limit=" + limit +
 				'}';
 	}
+
+	public CharSequence getLongDescription() {
+		return longDescription;
+	}
+
 }

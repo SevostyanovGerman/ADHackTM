@@ -31,6 +31,9 @@ public class MainController {
 		hookahPacman.setDomain("Кафе, бары, рестораны");
 		hookahPacman.setPictureLink("https://pp.userapi.com/c836523/v836523313/f12bd/Oul_e0pB1jI.jpg");
 		hookahPacman.setSex(2);
+		List<String> strings = new ArrayList<>();
+		strings.add("vk");
+		hookahPacman.setMarkets(strings);
 		hookahPacman.setTargetLink("https://vk.com/hookahpacman?ad_id=36252628");
 		marketingCompanyStatic.add(hookahPacman);
 	}
@@ -44,6 +47,10 @@ public class MainController {
 	@RequestMapping(value = "/marketing/start", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ResponseEntity<MarketingCompany> startMarketing(MarketingCompany marketingCompany) throws Exception {
+		List<String> markets = new ArrayList<>();
+		markets.add("fb");
+		markets.add("vk");
+		marketingCompany.setMarkets(markets);
 		marketingCompanyStatic.add(marketingCompany);
 		vkService.downloadImageOnDisk(marketingCompany.getPictureLink());
 
@@ -72,6 +79,6 @@ public class MainController {
 
 		System.out.println("отработал фейсбук");
 
-		return new ResponseEntity<MarketingCompany>(marketingCompany, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

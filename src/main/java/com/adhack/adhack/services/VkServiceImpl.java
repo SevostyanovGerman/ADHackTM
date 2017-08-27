@@ -45,7 +45,7 @@ public class VkServiceImpl implements VkService {
 	@Override
 	public VkAccessToken getAccessTokenFirstly(String code) {
 		RestTemplate restTemplate = new RestTemplate();
-		String queryUrl = "https://oauth.vk.com/access_token?client_id=6162776&client_secret=MYrno1U2gX7p7rT410Zw&redirect_uri=http://b8309721.ngrok.io/ads/vk/auth&code=" + code;
+		String queryUrl = "https://oauth.vk.com/access_token?client_id=6162776&client_secret=MYrno1U2gX7p7rT410Zw&redirect_uri=http://41569d3b.ngrok.io/ads/vk/auth&code=" + code;
 		VkAccessToken vkAccessToken = restTemplate.getForObject(queryUrl, VkAccessToken.class);
 		System.out.println(vkAccessToken);
 		return vkAccessToken;

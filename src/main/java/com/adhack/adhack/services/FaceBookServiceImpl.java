@@ -23,7 +23,7 @@ public class FaceBookServiceImpl implements FaceBookService {
     public void start(MarketingCompany marketingCompany) throws InterruptedException {
 
     try {
-        System.setProperty("webdriver.chrome.driver","chromedriver");
+        System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1024,1024));

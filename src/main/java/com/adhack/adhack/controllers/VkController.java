@@ -24,7 +24,7 @@ public class VkController {
 
     @RequestMapping("/")
     public ModelAndView auth(){
-        String redUrl = "https://oauth.vk.com/authorize?client_id=6162776&display=popup&redirect_uri=http://b8309721.ngrok.io/ads/vk/auth&scope=ads&response_type=code&v=5.68";
+        String redUrl = "https://oauth.vk.com/authorize?client_id=6162776&display=popup&redirect_uri=http://41569d3b.ngrok.io/ads/vk/auth&scope=ads&response_type=code&v=5.68";
         return new ModelAndView("redirect:" + redUrl);
     }
 
