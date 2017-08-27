@@ -26,7 +26,7 @@ public class MainController {
 	static {
 		MarketingCompany hookahPacman = new MarketingCompany();
 		hookahPacman.setCompanyName("Прямая трансляция в Pacman Lounge");
-		hookahPacman.setLimit(-1);
+		hookahPacman.setLimit(12000);
 		hookahPacman.setDomain("Кафе, бары, рестораны");
 		hookahPacman.setPictureLink("https://pp.userapi.com/c836523/v836523313/f12bd/Oul_e0pB1jI.jpg");
 		hookahPacman.setSex(2);
