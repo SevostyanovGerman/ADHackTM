@@ -3,6 +3,7 @@ package com.adhack.adhack.controllers;
 import com.adhack.adhack.models.AdSpecification;
 import com.adhack.adhack.models.CampaignSpecification;
 import com.adhack.adhack.models.MarketingCompany;
+import com.adhack.adhack.services.FaceBookService;
 import com.adhack.adhack.services.VkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,9 @@ public class MainController {
 	@Autowired
 	private VkService vkService;
 
+	@Autowired
+	private FaceBookService faceBookService;
+
 	@RequestMapping(value = "/marketing/start", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ResponseEntity<MarketingCompany> startMarketing(MarketingCompany marketingCompany) throws Exception {
@@ -63,6 +67,10 @@ public class MainController {
 		vkService.createAds(adSpecification);
 
 		System.out.println("всё ок");
+
+		faceBookService.start(marketingCompany);
+
+		System.out.println("отработал фейсбук");
 
 		return new ResponseEntity<MarketingCompany>(marketingCompany, HttpStatus.OK);
 	}
