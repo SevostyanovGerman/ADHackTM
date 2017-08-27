@@ -1,18 +1,18 @@
 package com.adhack.adhack.controllers;
 
-import com.adhack.adhack.models.ListVkCampaign;
-import com.adhack.adhack.models.VkAccessToken;
-import com.adhack.adhack.models.VkBudgetResponse;
-import com.adhack.adhack.models.VkCampaign;
+import com.adhack.adhack.models.*;
 import com.adhack.adhack.services.VkService;
+import com.adhack.adhack.services.VkServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -49,4 +49,40 @@ public class VkController {
 		VkBudgetResponse vkBudget = vkService.getVkBudget();
 		return new ResponseEntity<VkBudgetResponse>(vkBudget, HttpStatus.OK);
 	}
+
+	@RequestMapping("/ads/vk/createCampaigns")
+	public ResponseEntity createCampaigns() throws IOException {
+		CampaignSpecification campaignSpecification = new CampaignSpecification();
+		campaignSpecification.setType("normal");
+		campaignSpecification.setName("java обучение");
+		campaignSpecification.setDay_limit("500");
+		campaignSpecification.setAll_limit("500");
+		campaignSpecification.setStart_time(String.valueOf(System.currentTimeMillis() / 1000000L));
+		campaignSpecification.setStop_time(String.valueOf(System.currentTimeMillis() / 1000000L + 10000));
+		campaignSpecification.setStatus("0");
+		vkService.createCampaigns(campaignSpecification);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@RequestMapping("/ads/vk/createAds")
+	public ResponseEntity createAds() throws Exception {
+		AdSpecification adSpecification = new AdSpecification();
+		adSpecification.setCpc(vkService.calculateCpc());
+		adSpecification.setLink_url("java-mentor.com");
+		adSpecification.setPhoto("123");
+		adSpecification.setTitle("Java бучение");
+		adSpecification.setPhoto(vkService.uploadImg());
+		vkService.createAds(adSpecification);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@RequestMapping("/ads/vk/uploadImg")
+	public ResponseEntity uploadImg() throws Exception {
+		String result = vkService.uploadImg();
+		System.out.println(result);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+
+
 }
