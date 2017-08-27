@@ -22,7 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -78,6 +82,17 @@ public class VkServiceImpl implements VkService {
 		RestTemplate restTemplate = new RestTemplate();
 		VkBudgetResponse vkBudget = restTemplate.getForObject(query, VkBudgetResponse.class);
 		return vkBudget;
+	}
+
+	@Override
+	public Object getStatistics() {
+		String params = "ids_type=campaign&ids=" + 1007813523 + "&period=day&date_from=0&date_to=0&account_id=" + GlobalConstans.account_id;
+		String accessToken = getAccessToken();
+		String query = GlobalConstans.apiUrl + "ads.getStatistics?" + params + "&access_token=" + accessToken + "&v=" + GlobalConstans.vkVersion;
+		System.out.println(query);
+		RestTemplate restTemplate = new RestTemplate();
+		Object object = restTemplate.getForObject(query, Object.class);
+		return object;
 	}
 
 	@Override
@@ -183,7 +198,7 @@ public class VkServiceImpl implements VkService {
 	}
 
 	@Override
-	public String uploadImg() throws Exception {
+	public String uploadImg(String imagePath) throws Exception {
 		String params = "ad_format=" + 2;
 		String accessToken = getAccessToken();
 		String query = GlobalConstans.apiUrl + "ads.getUploadURL?" + params + "&access_token=" + accessToken + "&v=" + GlobalConstans.vkVersion;
@@ -214,6 +229,17 @@ public class VkServiceImpl implements VkService {
 		String photo = jsonObj.getString("photo");
 // print result
 		return photo;
+	}
+
+	public void downloadImageOnDisk(String stringUrl) {
+		Image image = null;
+		try {
+			URL url = new URL(stringUrl);
+			BufferedImage img = ImageIO.read(url);
+			File file = new File("D:\\ADHackTM\\test2.jpg");
+			ImageIO.write(img, "jpg", file);
+		} catch (IOException e) {
+		}
 	}
 
 }

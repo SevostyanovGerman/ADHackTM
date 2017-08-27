@@ -3,6 +3,7 @@ package com.adhack.adhack.controllers;
 import com.adhack.adhack.models.*;
 import com.adhack.adhack.services.VkService;
 import com.adhack.adhack.services.VkServiceImpl;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class VkController {
 	private VkService vkService;
 
     @RequestMapping("/")
-    public ModelAndView test(){
+    public ModelAndView auth(){
         String redUrl = "https://oauth.vk.com/authorize?client_id=6162776&display=popup&redirect_uri=http://b8309721.ngrok.io/ads/vk/auth&scope=ads&response_type=code&v=5.68";
         return new ModelAndView("redirect:" + redUrl);
     }
@@ -71,17 +72,26 @@ public class VkController {
 		adSpecification.setLink_url("java-mentor.com");
 		adSpecification.setPhoto("123");
 		adSpecification.setTitle("Java бучение");
-		adSpecification.setPhoto(vkService.uploadImg());
+		adSpecification.setPhoto(vkService.uploadImg("test2.jpg"));
 		vkService.createAds(adSpecification);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@RequestMapping("/ads/vk/uploadImg")
 	public ResponseEntity uploadImg() throws Exception {
-		String result = vkService.uploadImg();
+		String result = vkService.uploadImg("test2.jpg");
 		System.out.println(result);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+	@RequestMapping("/ads/vk/getStatistics")
+	public ResponseEntity<Object> getStatistics() throws Exception {
+		Object jsonObject = vkService.getStatistics();
+		System.out.println(jsonObject);
+		return new ResponseEntity<>(jsonObject, HttpStatus.OK);
+	}
+
+
 
 
 

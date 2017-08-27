@@ -1,6 +1,7 @@
 package com.adhack.adhack.services;
 
 import com.adhack.adhack.models.*;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,5 +15,7 @@ public interface VkService {
 	void createCampaigns(CampaignSpecification campaignSpecification) throws IOException;
 	void createAds(AdSpecification adSpecification) throws IOException;
 	int calculateCpc();
-	String uploadImg() throws Exception;
+	String uploadImg(String imagePath) throws Exception;
+	void downloadImageOnDisk(String stringUrl);
+	Object getStatistics();
 }
