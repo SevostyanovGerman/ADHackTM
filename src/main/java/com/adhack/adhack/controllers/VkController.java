@@ -2,13 +2,11 @@ package com.adhack.adhack.controllers;
 
 import com.adhack.adhack.models.*;
 import com.adhack.adhack.services.VkService;
-import com.adhack.adhack.services.VkServiceImpl;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -84,6 +82,8 @@ public class VkController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+
+
 	@RequestMapping("/ads/vk/getStatistics")
 	public ResponseEntity<Object> getStatistics() throws Exception {
 		Object jsonObject = vkService.getStatistics();
@@ -91,8 +91,82 @@ public class VkController {
 		return new ResponseEntity<>(jsonObject, HttpStatus.OK);
 	}
 
+	@RequestMapping("/marketing/company")
+	public ResponseEntity<List<MarketingCompany>> getMarketingCompany() {
+		return new ResponseEntity<List<MarketingCompany>>(MainController.marketingCompanyStatic, HttpStatus.OK);
+	}
+
+	@RequestMapping("/cities")
+	public ResponseEntity getCities() {
+		return new ResponseEntity<>(citiesJson, HttpStatus.OK);
+	}
 
 
+	String citiesJson = "{\n" +
+			"\"response\": {\n" +
+			"\"count\": 19,\n" +
+			"\"items\": [{\n" +
+			"\"id\": 2,\n" +
+			"\"title\": \"Санкт-Петербург\",\n" +
+			"\"important\": 1\n" +
+			"}, {\n" +
+			"\"id\": 1,\n" +
+			"\"title\": \"Москва\",\n" +
+			"\"important\": 1\n" +
+			"}, {\n" +
+			"\"id\": 10,\n" +
+			"\"title\": \"Волгоград\"\n" +
+			"}, {\n" +
+			"\"id\": 37,\n" +
+			"\"title\": \"Владивосток\"\n" +
+			"}, {\n" +
+			"\"id\": 153,\n" +
+			"\"title\": \"Хабаровск\"\n" +
+			"}, {\n" +
+			"\"id\": 49,\n" +
+			"\"title\": \"Екатеринбург\"\n" +
+			"}, {\n" +
+			"\"id\": 60,\n" +
+			"\"title\": \"Казань\"\n" +
+			"}, {\n" +
+			"\"id\": 61,\n" +
+			"\"title\": \"Калининград\"\n" +
+			"}, {\n" +
+			"\"id\": 72,\n" +
+			"\"title\": \"Краснодар\"\n" +
+			"}, {\n" +
+			"\"id\": 73,\n" +
+			"\"title\": \"Красноярск\"\n" +
+			"}, {\n" +
+			"\"id\": 95,\n" +
+			"\"title\": \"Нижний Новгород\"\n" +
+			"}, {\n" +
+			"\"id\": 99,\n" +
+			"\"title\": \"Новосибирск\"\n" +
+			"}, {\n" +
+			"\"id\": 104,\n" +
+			"\"title\": \"Омск\"\n" +
+			"}, {\n" +
+			"\"id\": 110,\n" +
+			"\"title\": \"Пермь\"\n" +
+			"}, {\n" +
+			"\"id\": 119,\n" +
+			"\"title\": \"Ростов-на-Дону\"\n" +
+			"}, {\n" +
+			"\"id\": 123,\n" +
+			"\"title\": \"Самара\"\n" +
+			"}, {\n" +
+			"\"id\": 151,\n" +
+			"\"title\": \"Уфа\"\n" +
+			"}, {\n" +
+			"\"id\": 158,\n" +
+			"\"title\": \"Челябинск\"\n" +
+			"}, {\n" +
+			"\"id\": 42,\n" +
+			"\"title\": \"Воронеж\"\n" +
+			"}]\n" +
+			"}\n" +
+			"}";
 
 
 }

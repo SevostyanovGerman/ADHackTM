@@ -10,8 +10,24 @@ public class AdSpecification {
 	private String title;
 	private String link_url;
 	private String photo;
-	private final int sex = 2;
+	private int sex;
+	private String cities;
 
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+
+	public int getSex() {
+		return sex;
+	}
+
+	public String getCities() {
+		return cities;
+	}
+
+	public void setCities(String cities) {
+		this.cities = cities;
+	}
 
 	public String getCampaign_id() {
 		return campaign_id;

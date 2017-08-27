@@ -1,16 +1,11 @@
 package com.adhack.adhack.models;
 
-import java.util.Arrays;
-import java.util.Date;
-
 public class MarketingCompany {
 	private String companyName;
 	private String domain;
 	private String countrie;
-	private String citie;
+	private int citie;
 	private String pictureLink;
-	private String longDescription;
-	private String shortDescription;
 	private int minAge;
 	private int maxAge;
 	private int sex;
@@ -42,11 +37,11 @@ public class MarketingCompany {
 		this.countrie = countrie;
 	}
 
-	public String getCitie() {
+	public int getCitie() {
 		return citie;
 	}
 
-	public void setCitie(String citie) {
+	public void setCitie(int citie) {
 		this.citie = citie;
 	}
 
@@ -56,22 +51,6 @@ public class MarketingCompany {
 
 	public void setPictureLink(String pictureLink) {
 		this.pictureLink = pictureLink;
-	}
-
-	public String getLongDescription() {
-		return longDescription;
-	}
-
-	public void setLongDescription(String longDescription) {
-		this.longDescription = longDescription;
-	}
-
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
 	}
 
 	public int getMinAge() {
@@ -131,8 +110,6 @@ public class MarketingCompany {
 				", countrie='" + countrie + '\'' +
 				", citie='" + citie + '\'' +
 				", pictureLink='" + pictureLink + '\'' +
-				", longDescription='" + longDescription + '\'' +
-				", shortDescription='" + shortDescription + '\'' +
 				", minAge=" + minAge +
 				", maxAge=" + maxAge +
 				", sex=" + sex +

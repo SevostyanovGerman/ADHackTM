@@ -15,9 +15,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class MainController {
+
+	public static List<MarketingCompany> marketingCompanyStatic = new ArrayList<>();
+
+	static {
+		MarketingCompany hookahPacman = new MarketingCompany();
+		hookahPacman.setCompanyName("Прямая трансляция в Pacman Lounge");
+		hookahPacman.setLimit(-1);
+		hookahPacman.setDomain("Кафе, бары, рестораны");
+		hookahPacman.setPictureLink("https://pp.userapi.com/c836523/v836523313/f12bd/Oul_e0pB1jI.jpg");
+		hookahPacman.setSex(2);
+		hookahPacman.setTargetLink("https://vk.com/hookahpacman?ad_id=36252628");
+		marketingCompanyStatic.add(hookahPacman);
+	}
 
 	@Autowired
 	private VkService vkService;
@@ -25,6 +40,7 @@ public class MainController {
 	@RequestMapping(value = "/marketing/start", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ResponseEntity<MarketingCompany> startMarketing(MarketingCompany marketingCompany) throws Exception {
+		marketingCompanyStatic.add(marketingCompany);
 		vkService.downloadImageOnDisk(marketingCompany.getPictureLink());
 
 		CampaignSpecification campaignSpecification = new CampaignSpecification();
@@ -42,6 +58,8 @@ public class MainController {
 		adSpecification.setLink_url(marketingCompany.getTargetLink());
 		adSpecification.setPhoto(vkService.uploadImg("test2.jpg"));
 		adSpecification.setTitle(marketingCompany.getCompanyName());
+		adSpecification.setSex(marketingCompany.getSex());
+		adSpecification.setCities(String.valueOf(marketingCompany.getCitie()));
 		vkService.createAds(adSpecification);
 
 		System.out.println("всё ок");
